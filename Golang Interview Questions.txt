@@ -1,0 +1,207 @@
+Q. Return multiple values from a function?
+A. Go has built-in support for multiple return values. This feature is used often in idiomatic Go, for example to return both result and error values from a function.
+
+Example :
+    package main
+
+    import "fmt"
+
+    func vals() (int, int) {
+        return 3, 7
+    }
+
+    func main() {
+
+        a, b := vals()
+        fmt.Println(a)
+        fmt.Println(b)
+
+        _, c := vals()
+        fmt.Println(c)
+    }
+
+Q. How many ways can you pass parameters to a method?
+A. A function in Golang is a collection of statements which is used to perform specific task and return the result to the caller. A function can also perform some specific task without returning anything. Golang supports two different ways to pass arguments to the function i.e. Pass by Value or Call by Value and Pass By Reference or Call By Reference.
+
+Q. Default way of passing parameters to a function?
+A. By default, Golang uses the call by value way to pass the arguments to the function.
+
+Q. Function closures?
+A. Go supports anonymous functions, which can form closures. Anonymous functions are useful when you want to define a function inline without having to name it.
+
+Example:
+    package main
+
+    import "fmt"
+
+    func intSeq() func() int {
+        i := 0
+        return func() int {
+            i++
+            return i
+        }
+    }
+
+    func main() {
+
+        nextInt := intSeq()
+
+        fmt.Println(nextInt())
+        fmt.Println(nextInt())
+        fmt.Println(nextInt())
+
+        newInts := intSeq()
+        fmt.Println(newInts())
+    }
+
+Q. Difference between actual and formal parameters?
+A. Actual parameters: Parameters that are sent to the function at the calling end.
+   For example, amount is a formal parameter of processDeposit
+   Formal Parameters: Parameters that are at the receiving of the function definition.
+   For example, the 200 used when processDeposit is called is an actual parameter.
+
+Q. Variable declaration and variable definition?
+A. In Go, variables are explicitly declared and used by the compiler to e.g. check type-correctness of function calls.
+
+Example:
+    package main
+
+    import "fmt"
+
+    func main() {
+
+        var a = "initial"
+        fmt.Println(a)
+
+        var b, c int = 1, 2
+        fmt.Println(b, c)
+
+        var d = true
+        fmt.Println(d)
+
+        var e int
+        fmt.Println(e)
+
+        f := "apple"
+        fmt.Println(f)
+    }
+
+Q. Pointer on pointer?
+A. Pointers in Go programming language or Golang is a variable which is used to store the memory address of another variable. A pointer is a special variable so it can point to a variable of any type even to a pointer. Basically, this looks like a chain of pointers. When we define a pointer to pointer then the first pointer is used to store the address of the second pointer. This concept is sometimes termed as Double Pointers.
+   Declaring Pointer to Pointer is similar to declaring pointer in Go. The difference is we have to place an additional ‘*’ before the name of pointer name. This is generally done when we are declaring the pointer variable using the var keyword along with the type. Below example and image will explain the concept in much better way.
+
+   Example: In the below program the pointer pt2 stores the address of pt1 pointer. Dereferencing pt2 i.e. *pt2 will give the address of variable v or you can also say the value of pointer pt1. If you will try **pt2 then this will give the value of the variable v i.e. 100.
+
+    package main 
+    
+    import "fmt"
+    
+    func main() { 
+    
+        var V int = 100 
+        
+        var pt1 *int = &V 
+        
+        var pt2 **int = &pt1 
+    
+        fmt.Println("The Value of Variable V is = ", V) 
+        fmt.Println("Address of variable V is = ", &V) 
+    
+        fmt.Println("The Value of pt1 is = ", pt1) 
+        fmt.Println("Address of pt1 is = ", &pt1) 
+    
+        fmt.Println("The value of pt2 is = ", pt2) 
+    
+        fmt.Println("Value at the address of pt2 is or *pt2 = ", *pt2) 
+        
+        fmt.Println("*(Value at the address of pt2 is) or **pt2 = ", **pt2) 
+    } 
+
+Q. Create a map in Go?
+A. Maps are Go’s built-in associative data type (sometimes called hashes or dicts in other languages).
+
+   Example:
+
+    package main
+
+    import "fmt"
+
+    func main() {
+
+        m := make(map[string]int)
+
+        m["k1"] = 7
+        m["k2"] = 13
+
+        fmt.Println("map:", m)
+
+        v1 := m["k1"]
+        fmt.Println("v1: ", v1)
+
+        fmt.Println("len:", len(m))
+
+        delete(m, "k2")
+        fmt.Println("map:", m)
+
+        _, prs := m["k2"]
+        fmt.Println("prs:", prs)
+
+        n := map[string]int{"foo": 1, "bar": 2}
+        fmt.Println("map:", n)
+    }
+
+Q. Type Cast:
+A. 
+
+a. Int to float:
+
+package main 
+  
+import ( 
+    "fmt"
+    "reflect"
+) 
+  
+func main() { 
+  
+    // var declared x as int 
+    var x int64 = 5 
+  
+    // y is a float64 type variable 
+    var y float64 = float64(x) 
+  
+    // printing the values of x and y 
+    fmt.Printf("x = %d \n", x) 
+    fmt.Printf("y = %f \n", y) 
+  
+    // to print a float upto a 
+    // specific number of decimal point 
+    fmt.Printf("\ny upto 3 decimal = %.3f", y) 
+  
+    // getting the converted type 
+    fmt.Println("\n", reflect.TypeOf(y)) 
+  
+} 
+
+b. Float to int
+
+var f float64 = 390.8
+var i int = int(f)
+
+fmt.Printf("f = %.2f\n", f)
+fmt.Printf("i = %d\n", i)
+
+
+c. Int to string
+
+s := strconv.Itoa(97) // s == "97"
+
+d. String to int
+
+s := "97"
+if n, err := strconv.Atoi(s); err == nil {
+    fmt.Println(n+1)
+} else {
+    fmt.Println(s, "is not an integer.")
+}
+// Output: 98
